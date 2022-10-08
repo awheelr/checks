@@ -5,13 +5,24 @@
  * 
  * https://www.electronjs.org/docs/latest/tutorial/sandbox
  */
-window.addEventListener('DOMContentLoaded', () => {
-  const replaceText = (selector, text) => {
-    const element = document.getElementById(selector)
-    if (element) element.innerText = text
-  }
+// window.addEventListener('DOMContentLoaded', () => {
+//   const replaceText = (selector, text) => {
+//     const element = document.getElementById(selector)
+//     if (element) element.innerText = text
+//   }
 
-  for (const type of ['chrome', 'node', 'electron']) {
-    replaceText(`${type}-version`, process.versions[type])
-  }
-})
+//   for (const type of ['chrome', 'node', 'electron']) {
+//     replaceText(`${type}-version`, process.versions[type])
+//   }
+// })
+
+const {ipcRenderer} = require('electron');
+
+const menu = document.querySelector('.nav');
+    menu.addEventListener('click', function() {
+      ipcRenderer.send('open-menu-window');
+    })
+
+document.getElementById('sunday').addEventListener('click', () => {
+    ipcRenderer.send('get-win-pos')
+  })

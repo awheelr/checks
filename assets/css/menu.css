@@ -1,0 +1,74 @@
+* {
+	font-family: din-2014, sans-serif;
+	font-weight: 400;
+	font-style: normal;
+    color: white;
+}
+
+/* Hide scrollbar for Chrome, Safari and Opera */
+::-webkit-scrollbar {
+    display: none;
+}
+
+main {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    align-content: center;
+    flex-direction: row;
+    width: 275px;
+    height: 300px;
+    background-color:#23272b;
+    border-radius: 8px;
+    margin-right: 4px;
+}
+
+.calendar {
+    display: flex;
+    flex-wrap: nowrap;
+    flex-direction: column;
+    align-items: center;
+    justify-content: flex-start;
+    align-content: center;
+    width: 275px;
+    height: 300px;
+    overflow: scroll;
+    scroll-snap-type: y mandatory;
+}
+
+.day {
+    font-size: 14px;
+    width: 28px;
+    height: 28px;
+    line-height: 28px;
+    border-radius: 50%;
+    text-align: center;
+    color: white;
+    background-color: #3b3b3b; /* #5f6368 */
+    border: 1px;
+    border-style: solid;
+    border-color: #242424;
+    user-select: none;
+    box-shadow: 2px 2px 2px 0 rgba(0, 0, 0, 0.2);
+    transition: background-color 100ms linear;
+}
+
+.day-active {
+    background-color: rgb(172, 231, 190, 0.3);
+    border-color: #a6e9baf3;
+    box-shadow: 0px 0px 0px 2px rgba(172, 231, 190, 0.3);
+}
+
+.month {
+    padding-top: 20px;
+}
+
+.January, .February, .March, .April, .May, .June, .July, .August, .September, .October, .November, .December {
+    display: grid;
+    grid-template-columns: repeat(7, 1fr);
+    grid-template-rows: repeat(5, 1fr);
+    grid-column-gap: 2px;
+    grid-row-gap: 2px;
+    padding: 15px;
+    scroll-snap-align: start;
+}
