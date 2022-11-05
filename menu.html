@@ -1,16 +1,167 @@
 <!DOCTYPE html>
 <html>
   <head>
-    <meta charset="UTF-8">
+    <meta charset="UTF-8" />
     <!-- https://developer.mozilla.org/en-US/docs/Web/HTTP/CSP -->
-    <meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self'; style-src 'self' 'unsafe-inline'">
-    <link href="./assets/css/menu.css" rel="stylesheet">
+    <meta
+      http-equiv="Content-Security-Policy"
+      content="default-src 'self'; script-src 'self'; style-src 'self' 'unsafe-inline'"
+    />
+    <link href="./assets/css/menu.css" rel="stylesheet" />
     <title></title>
   </head>
   <body>
     <main>
-        <div class="calendar"></div>
+      <div class="calendar">
+        <div class="month" id="January">
+          <div class="month-name">January</div>
+          <div class="days"></div>
+        </div>
+        <div class="month" id="February">
+          <div class="month-name">February</div>
+
+          <div class="days">
+            <div class="day-of-week">Su</div>
+            <div class="day-of-week">Mo</div>
+            <div class="day-of-week">Tu</div>
+            <div class="day-of-week">We</div>
+            <div class="day-of-week">Th</div>
+            <div class="day-of-week">Fr</div>
+            <div class="day-of-week">Sa</div>
+          </div>
+        </div>
+        <div class="month" id="March">
+          <div class="month-name">March</div>
+
+          <div class="days">
+            <div class="day-of-week">Su</div>
+            <div class="day-of-week">Mo</div>
+            <div class="day-of-week">Tu</div>
+            <div class="day-of-week">We</div>
+            <div class="day-of-week">Th</div>
+            <div class="day-of-week">Fr</div>
+            <div class="day-of-week">Sa</div>
+          </div>
+        </div>
+        <div class="month" id="April">
+          <div class="month-name">April</div>
+
+          <div class="days">
+            <div class="day-of-week">Su</div>
+            <div class="day-of-week">Mo</div>
+            <div class="day-of-week">Tu</div>
+            <div class="day-of-week">We</div>
+            <div class="day-of-week">Th</div>
+            <div class="day-of-week">Fr</div>
+            <div class="day-of-week">Sa</div>
+          </div>
+        </div>
+        <div class="month" id="May">
+          <div class="month-name">May</div>
+
+          <div class="days">
+            <div class="day-of-week">Su</div>
+            <div class="day-of-week">Mo</div>
+            <div class="day-of-week">Tu</div>
+            <div class="day-of-week">We</div>
+            <div class="day-of-week">Th</div>
+            <div class="day-of-week">Fr</div>
+            <div class="day-of-week">Sa</div>
+          </div>
+        </div>
+        <div class="month" id="June">
+          <div class="month-name">June</div>
+
+          <div class="days">
+            <div class="day-of-week">Su</div>
+            <div class="day-of-week">Mo</div>
+            <div class="day-of-week">Tu</div>
+            <div class="day-of-week">We</div>
+            <div class="day-of-week">Th</div>
+            <div class="day-of-week">Fr</div>
+            <div class="day-of-week">Sa</div>
+          </div>
+        </div>
+        <div class="month" id="July">
+          <div class="month-name">July</div>
+
+          <div class="days">
+            <div class="day-of-week">Su</div>
+            <div class="day-of-week">Mo</div>
+            <div class="day-of-week">Tu</div>
+            <div class="day-of-week">We</div>
+            <div class="day-of-week">Th</div>
+            <div class="day-of-week">Fr</div>
+            <div class="day-of-week">Sa</div>
+          </div>
+        </div>
+        <div class="month" id="August">
+          <div class="month-name">August</div>
+
+          <div class="days">
+            <div class="day-of-week">Su</div>
+            <div class="day-of-week">Mo</div>
+            <div class="day-of-week">Tu</div>
+            <div class="day-of-week">We</div>
+            <div class="day-of-week">Th</div>
+            <div class="day-of-week">Fr</div>
+            <div class="day-of-week">Sa</div>
+          </div>
+        </div>
+        <div class="month" id="September">
+          <div class="month-name">September</div>
+
+          <div class="days">
+            <div class="day-of-week">Su</div>
+            <div class="day-of-week">Mo</div>
+            <div class="day-of-week">Tu</div>
+            <div class="day-of-week">We</div>
+            <div class="day-of-week">Th</div>
+            <div class="day-of-week">Fr</div>
+            <div class="day-of-week">Sa</div>
+          </div>
+        </div>
+        <div class="month" id="October">
+          <div class="month-name">October</div>
+
+          <div class="days">
+            <div class="day-of-week">Su</div>
+            <div class="day-of-week">Mo</div>
+            <div class="day-of-week">Tu</div>
+            <div class="day-of-week">We</div>
+            <div class="day-of-week">Th</div>
+            <div class="day-of-week">Fr</div>
+            <div class="day-of-week">Sa</div>
+          </div>
+        </div>
+        <div class="month" id="November">
+          <div class="month-name">November</div>
+
+          <div class="days">
+            <div class="day-of-week">Su</div>
+            <div class="day-of-week">Mo</div>
+            <div class="day-of-week">Tu</div>
+            <div class="day-of-week">We</div>
+            <div class="day-of-week">Th</div>
+            <div class="day-of-week">Fr</div>
+            <div class="day-of-week">Sa</div>
+          </div>
+        </div>
+        <div class="month" id="December">
+          <div class="month-name">December</div>
+
+          <div class="days">
+            <div class="day-of-week">Su</div>
+            <div class="day-of-week">Mo</div>
+            <div class="day-of-week">Tu</div>
+            <div class="day-of-week">We</div>
+            <div class="day-of-week">Th</div>
+            <div class="day-of-week">Fr</div>
+            <div class="day-of-week">Sa</div>
+          </div>
+        </div>
+      </div>
     </main>
-    <script src="./assets/js/weekly.js"></script>
+    <!-- <script src="./assets/js/renderer.js"></script> -->
   </body>
 </html>

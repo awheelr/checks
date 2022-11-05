@@ -1,5 +1,10 @@
+@font-face {
+    font-family: 'Lato';
+    src: url('../fonts/Lato-Light.ttf');
+}
+
 * {
-	font-family: din-2014, sans-serif;
+	font-family: Lato, sans-serif;
 	font-weight: 400;
 	font-style: normal;
     color: white;
@@ -16,11 +21,7 @@ main {
     align-items: center;
     align-content: center;
     flex-direction: row;
-    width: 275px;
-    height: 300px;
     background-color:#23272b;
-    border-radius: 8px;
-    margin-right: 4px;
 }
 
 .calendar {
@@ -30,9 +31,10 @@ main {
     align-items: center;
     justify-content: flex-start;
     align-content: center;
-    width: 275px;
-    height: 300px;
+    height: 311px;
     overflow: scroll;
+    scroll-snap-align: center;
+    scroll-behavior: smooth;
     scroll-snap-type: y mandatory;
 }
 
@@ -59,16 +61,31 @@ main {
     box-shadow: 0px 0px 0px 2px rgba(172, 231, 190, 0.3);
 }
 
+
 .month {
-    padding-top: 20px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 20px;
+    scroll-snap-align: center;
+    scroll-behavior: smooth;
+    scroll-snap-type: y mandatory;
 }
 
-.January, .February, .March, .April, .May, .June, .July, .August, .September, .October, .November, .December {
+.month-name {
+    margin: 1em auto;
+}
+
+.days {
     display: grid;
     grid-template-columns: repeat(7, 1fr);
     grid-template-rows: repeat(5, 1fr);
     grid-column-gap: 2px;
     grid-row-gap: 2px;
+    justify-items: center;
     padding: 15px;
-    scroll-snap-align: start;
+}
+
+.day-of-week {
+    font-family: 'Lato';
 }

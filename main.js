@@ -3,7 +3,7 @@ const path = require("path");
 
 function createWindow() {
   // Create the tray icon.
-  tray = new Tray(path.join(__dirname, "assets", "chex.png"));
+  tray = new Tray(path.join(__dirname, "./assets/chex.ico"));
 
   // Create the main window.
   const mainWindow = new BrowserWindow({
@@ -19,48 +19,56 @@ function createWindow() {
     webPreferences: {
       nodeIntegration: true,
       contextIsolation: false,
-      preload: path.join(__dirname, "./assets/js/preload.js"),
+      enableRemoteModule: true,
+      preload: path.join(__dirname, "./assets/js/indexPreload.js"),
     },
   });
-
   mainWindow.loadFile("index.html");
-
-  // mainWindow.webContents.openDevTools();
-
-  // Create the menu window.
-  menu = new BrowserWindow({
-    alwaysOnTop: true,
-    frame: false,
-    transparent: true,
-    resizable: false,
-    maximizable: false,
-    x: 1579,
-    y: 751,
-    width: 285, //300
-    height: 250,
-    webPreferences: {
-      nodeIntegration: true,
-    },
-  });
-
-  menu.loadFile("menu.html");
-
-  menu.webContents.openDevTools();
+  mainWindow.webContents.openDevTools();
 
   mainWindow.on("close", function (event) {
     event.preventDefault();
     mainWindow.hide();
     return false;
   });
+  // * Need to put this in index.html's preload script so that we can send messages back and forth between index and menu.
+  // Create the menu window.
+  let menu = new BrowserWindow({
+    alwaysOnTop: true,
+    frame: false,
+    transparent: true,
+    resizable: false,
+    maximizable: false,
+    x: 1579,
+    y: 690,
+    width: 292, //300
+    height: 311,
+    webPreferences: {
+      nodeIntegration: true,
+      contextIsolation: false,
+      preload: path.join(__dirname, "./assets/js/menuPreload.js"),
+    },
+  });
+  menu.loadFile("menu.html");
+  menu.webContents.openDevTools();
 
-  tray.on('click', () => {
+  ipcMain.on("updateDay", (event, message) => {
+    menu.webContents.send('updateDay', message)
+  });
+
+  ipcMain.on("open-menu-window", () => {
+    // menu.webContents.send('updateMenu', {'SAVED': 'File Saved'}) [*] Removed becuase updateDay seems to solve the problem in a more efficent way.
+    menu.isVisible() ? menu.hide() : menu.show();
+  });
+
+  tray.on("click", () => {
     if (menu.isVisible()) {
       menu.hide();
     }
     mainWindow.isVisible() ? mainWindow.hide() : mainWindow.show();
   });
 
-  tray.on('right-click', () => {
+  tray.on("right-click", () => {
     if (process.platform !== "darwin") {
       tray.destroy();
       app.quit();
@@ -97,9 +105,6 @@ app.on("window-all-closed", function () {
   }
 });
 
-ipcMain.on("open-menu-window", () => {
-  menu.isVisible() ? menu.hide() : menu.show();
-});
 
 ipcMain.on("get-win-pos", () => {
   console.log(menu.getPosition());
