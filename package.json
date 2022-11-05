@@ -1,8 +1,9 @@
 {
   "devDependencies": {
-    "electron": "^21.1.1"
+    "electron": "^21.1.1",
+    "electron-builder": "^23.6.0"
   },
-  "name": "chex",
+  "name": "checks",
   "version": "1.0.0",
   "main": "main.js",
   "dependencies": {
@@ -79,14 +80,27 @@
     "yauzl": "^2.10.0"
   },
   "scripts": {
-    "start": "electron ."
+    "start": "electron .",
+    "build": "electron-builder"
+  },
+  "build": {
+    "appId": "com.checks.app",
+    "productName": "Checks",
+    "extraFiles": [
+      "assets/checks.ico",
+      "assets/db.sqlite"
+    ],
+    "win": {
+      "icon": "assets/checks.ico",
+      "target": "nsis"
+    }
   },
   "repository": {
     "type": "git",
     "url": "git+https://github.com/awheelr/chex.git"
   },
   "keywords": [],
-  "author": "",
+  "author": "Austin Wheeler",
   "license": "ISC",
   "bugs": {
     "url": "https://github.com/awheelr/chex/issues"

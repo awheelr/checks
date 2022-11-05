@@ -2,49 +2,21 @@ const { ipcRenderer } = require("electron");
 const Sequelize = require("sequelize");
 const path = require("path");
 
-var sequelize = new Sequelize("database", "austin", "root", {
-  host: "0.0.0.0",
+// var sequelize = new Sequelize({
+//   logging: false,
+//   dialect: "sqlite",
+//   storage: path.join(__dirname, "..", "db.sqlite"),
+// });
+
+var sequelize = new Sequelize({
+  logging: false,
   dialect: "sqlite",
-  storage: path.join(__dirname, "..", "database.sqlite"),
+  storage: path.join("assets/db.sqlite"),
 });
 
 const Dates = sequelize.define("dates", {
   listOfDates: Sequelize.JSON,
 });
-
-/*
-  [!] Notes
-  updateMenu works perfectly for when the menu tab is reopened
-  via the menu button on browser window 1, however making another
-  function to only update the day selected in browserwindow 1 would
-  make things run faster. Example: select Sunday and the date is Nov 6
-  instead of running updateMenu run the new function which would only
-  update that specific date instead of looping through all 365 divs.
-*/
-
-// const updateMenu = async () => {
-//   try {
-//     const dbFind = await Dates.findAll();
-//     const array = await dbFind[0].dataValues.listOfDates;
-//     const newArray = await array.map((obj) => ({ ...obj }));
-
-//     for (let i = 0; i < newArray.length; i++) {
-//       const isCompleted = newArray[i].completed;
-//       const thisDate = newArray[i].date;
-//       const thisDiv = document.getElementById(`${thisDate}`);
-//       if (isCompleted === false) {
-//         thisDiv.classList.remove("day-active");
-//         console.log("Attempting to remove class: day-active");
-//       } else if (isCompleted === true) {
-//         console.log(thisDate, thisDiv);
-//         thisDiv.classList.add("day-active");
-//       }
-//     }
-//   } catch (err) {
-//     console.log(err);
-//     throw err;
-//   }
-// };
 
 window.addEventListener("DOMContentLoaded", async function (event) {
   loadMenu();

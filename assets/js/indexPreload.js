@@ -2,10 +2,16 @@ const { ipcRenderer } = require("electron");
 const Sequelize = require("sequelize");
 const path = require("path");
 
-var sequelize = new Sequelize("database", "austin", "root", {
-  host: "0.0.0.0",
+// var sequelize = new Sequelize({
+//   logging: false,
+//   dialect: "sqlite",
+//   storage: path.join(__dirname, "..", "db.sqlite"),
+// });
+
+var sequelize = new Sequelize({
+  logging: false,
   dialect: "sqlite",
-  storage: path.join(__dirname, "..", "database.sqlite"),
+  storage: path.join("assets/db.sqlite"),
 });
 
 var getDaysArray = function (start, end) {
@@ -153,15 +159,6 @@ async function findDates(date) {
     throw err;
   }
 }
-
-/* 
-  [!] Notes
-  finding the current day of week is still troublesome currently
-  the problem is that when calling updateDates and inputing: week[0]
-  the output would be plus or minus a day so if it was Nov 6 it could
-  come out as Nov 5 or Nov 7 in the function. Weird bug so probably
-  recode the way i find the current day's date.
-*/
 
 function dates() {
   const current = new Date();

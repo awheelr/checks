@@ -3,10 +3,11 @@ const path = require("path");
 
 function createWindow() {
   // Create the tray icon.
-  tray = new Tray(path.join(__dirname, "./assets/chex.ico"));
+
+  let tray = new Tray(path.join("assets/checks.ico"));
 
   // Create the main window.
-  const mainWindow = new BrowserWindow({
+  let mainWindow = new BrowserWindow({
     alwaysOnTop: true,
     frame: false,
     transparent: true,
@@ -24,14 +25,14 @@ function createWindow() {
     },
   });
   mainWindow.loadFile("index.html");
-  mainWindow.webContents.openDevTools();
+  // mainWindow.webContents.openDevTools();
 
-  mainWindow.on("close", function (event) {
-    event.preventDefault();
-    mainWindow.hide();
-    return false;
-  });
-  // * Need to put this in index.html's preload script so that we can send messages back and forth between index and menu.
+  // mainWindow.on("close", function (event) {
+  //   event.preventDefault();
+  //   mainWindow.hide();
+  //   return false;
+  // });
+
   // Create the menu window.
   let menu = new BrowserWindow({
     alwaysOnTop: true,
@@ -50,10 +51,10 @@ function createWindow() {
     },
   });
   menu.loadFile("menu.html");
-  menu.webContents.openDevTools();
+  // menu.webContents.openDevTools();
 
   ipcMain.on("updateDay", (event, message) => {
-    menu.webContents.send('updateDay', message)
+    menu.webContents.send("updateDay", message);
   });
 
   ipcMain.on("open-menu-window", () => {
@@ -74,6 +75,14 @@ function createWindow() {
       app.quit();
     }
   });
+
+  mainWindow.on("closed", () => {
+    mainWindow = null;
+  });
+
+  menu.on("closed", () => {
+    menu = null;
+  });
 }
 
 // This method will be called when Electron has finished
@@ -83,16 +92,16 @@ function createWindow() {
 app.whenReady().then(() => {
   createWindow();
 
-  app.on("activate", function () {
-    // On macOS it's common to re-create a window in the app when the
-    // dock icon is clicked and there are no other windows open.
-    if (BrowserWindow.getAllWindows().length === 0) createWindow();
-  });
+  // app.on("activate", function () {
+  //   // On macOS it's common to re-create a window in the app when the
+  //   // dock icon is clicked and there are no other windows open.
+  //   if (BrowserWindow.getAllWindows().length === 0) createWindow();
+  // });
 
-  app.on("close", function (event) {
-    event.preventDefault();
-    BrowserWindow.hide();
-  });
+  // app.on("close", function (event) {
+  //   event.preventDefault();
+  //   BrowserWindow.hide();
+  // });
 });
 
 // Quit when all windows are closed, except on macOS. There, it's common
@@ -105,7 +114,9 @@ app.on("window-all-closed", function () {
   }
 });
 
-
+app.on("activate", function () {
+  if (BrowserWindow.getAllWindows().length === 0) createWindow();
+});
 ipcMain.on("get-win-pos", () => {
   console.log(menu.getPosition());
 });
