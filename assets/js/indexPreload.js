@@ -52,7 +52,7 @@ const Dates = sequelize.define("dates", {
   listOfDates: Sequelize.JSON,
 });
 
-Dates.sync();
+Dates.sync({force: true});
 
 async function init() {
   try {
