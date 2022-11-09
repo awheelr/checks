@@ -9,4 +9,4 @@
 ### Development
 
 - [ ] Electron tray position.
-- [ ] Load new week in index.html
+- [x] Load new week in index.html

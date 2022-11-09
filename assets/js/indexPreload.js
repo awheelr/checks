@@ -52,7 +52,7 @@ const Dates = sequelize.define("dates", {
   listOfDates: Sequelize.JSON,
 });
 
-Dates.sync({force: true});
+Dates.sync();
 
 async function init() {
   try {
@@ -224,7 +224,7 @@ window.addEventListener("DOMContentLoaded", () => {
   });
 });
 
-ipcRenderer.on("openMenu", () => {
+ipcRenderer.on("openChecks", () => {
   const currentWeek = dates();
   loadWeek(currentWeek);
 });

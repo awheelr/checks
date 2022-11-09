@@ -27,14 +27,9 @@ function createWindow() {
   mainWindow.loadFile("index.html");
   // mainWindow.webContents.openDevTools();
 
-  ipcMain.on("openMenu", () => {
-    mainWindow.webContents.send("openMenu");
+  ipcMain.on("updateDay", (event, message) => {
+    menu.webContents.send("updateDay", message);
   });
-  // mainWindow.on("close", function (event) {
-  //   event.preventDefault();
-  //   mainWindow.hide();
-  //   return false;
-  // });
 
   // Create the menu window.
   let menu = new BrowserWindow({
@@ -70,7 +65,7 @@ function createWindow() {
       mainWindow.hide();
     } else {
       mainWindow.show();
-      mainWindow.webContents.send("openMenu");
+      mainWindow.webContents.send("openChecks");
     }
     // mainWindow.isVisible() ? mainWindow.hide() : mainWindow.show();
   });
@@ -97,17 +92,6 @@ function createWindow() {
 
 app.whenReady().then(() => {
   createWindow();
-
-  // app.on("activate", function () {
-  //   // On macOS it's common to re-create a window in the app when the
-  //   // dock icon is clicked and there are no other windows open.
-  //   if (BrowserWindow.getAllWindows().length === 0) createWindow();
-  // });
-
-  // app.on("close", function (event) {
-  //   event.preventDefault();
-  //   BrowserWindow.hide();
-  // });
 });
 
 // Quit when all windows are closed, except on macOS. There, it's common
