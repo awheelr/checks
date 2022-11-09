@@ -88,11 +88,11 @@ const loadWeek = async (dt) => {
       const dbFindArray = await Dates.findAll(); // holds the database model
       const array = await dbFindArray[0].dataValues.listOfDates; // array saved to database model
       let newArray = await array.map((obj) => ({ ...obj }));
+      // Loop through week array.
       for (let i = 0; i < dt.length; i++) {
         const dateIndex = await newArray.findIndex(
           (a) => a.date === `${dt[i]}`
         );
-        // console.log(newArray[dateIndex].completed);
         if (dateIndex !== -1) {
           if (newArray[dateIndex].completed === true) {
             const thisDay = newArray[dateIndex].day;
@@ -222,4 +222,9 @@ window.addEventListener("DOMContentLoaded", () => {
   document.getElementById("menu").addEventListener("click", () => {
     ipcRenderer.send("open-menu-window");
   });
+});
+
+ipcRenderer.on("openMenu", () => {
+  const currentWeek = dates();
+  loadWeek(currentWeek);
 });

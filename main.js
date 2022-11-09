@@ -25,8 +25,11 @@ function createWindow() {
     },
   });
   mainWindow.loadFile("index.html");
-  // mainWindow.webContents.openDevTools();
+  mainWindow.webContents.openDevTools();
 
+  ipcMain.on("openMenu", () => {
+    mainWindow.webContents.send("openMenu");
+  });
   // mainWindow.on("close", function (event) {
   //   event.preventDefault();
   //   mainWindow.hide();
@@ -53,10 +56,6 @@ function createWindow() {
   menu.loadFile("menu.html");
   // menu.webContents.openDevTools();
 
-  ipcMain.on("updateDay", (event, message) => {
-    menu.webContents.send("updateDay", message);
-  });
-
   ipcMain.on("open-menu-window", () => {
     // menu.webContents.send('updateMenu', {'SAVED': 'File Saved'}) [*] Removed becuase updateDay seems to solve the problem in a more efficent way.
     menu.isVisible() ? menu.hide() : menu.show();
@@ -66,7 +65,14 @@ function createWindow() {
     if (menu.isVisible()) {
       menu.hide();
     }
-    mainWindow.isVisible() ? mainWindow.hide() : mainWindow.show();
+
+    if (mainWindow.isVisible()) {
+      mainWindow.hide();
+    } else {
+      mainWindow.show();
+      mainWindow.webContents.send("openMenu");
+    }
+    // mainWindow.isVisible() ? mainWindow.hide() : mainWindow.show();
   });
 
   tray.on("right-click", () => {
